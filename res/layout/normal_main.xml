@@ -23,7 +23,7 @@
         android:layout_below="@+id/lengthText"
         android:ems="10"
         android:hint="@string/duration_field_hint"
-        android:inputType="number" />
+        android:inputType="number" android:imeOptions="actionDone" />
 
     <Button
         android:id="@+id/startButton"

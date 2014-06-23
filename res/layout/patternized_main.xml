@@ -51,7 +51,8 @@
         android:layout_below="@+id/pausesLabel"
         android:ems="10"
         android:inputType="number"
-        android:hint="@string/pauses_field"/>
+        android:hint="@string/pauses_field"
+        android:imeOptions="actionDone"/>
 
     <CheckBox
         android:id="@+id/repeatCheckBox"

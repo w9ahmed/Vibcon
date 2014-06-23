@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdView;
+
 public class MainActivity extends ActionBarActivity {
 	
 	public final static int TO_SECONDS = 1000;
@@ -27,6 +29,7 @@ public class MainActivity extends ActionBarActivity {
 	public final static int SECOND_ITEM = 1;
 	
 	protected Vibrator vibrator;
+	//private InputMethodManager keyboard;
 	
 	protected Button startNormalButton;
 	protected Button startPatternButton;
@@ -49,15 +52,21 @@ public class MainActivity extends ActionBarActivity {
 	
 	private View normalView;
 	private View patternedView;
+	private AdView adView;
+	//private AdsLoader advertise;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.screen_main); 
         
-        layoutSpinner = (Spinner) findViewById(R.id.optionsSpinner);
+        //keyboard = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        
+        layoutSpinner = (Spinner) findViewById(R.id.optionsSpinner);
         vibratorIsOn = false;
+        adView = (AdView) findViewById(R.id.adView);
+        /*advertise = */new AdsLoader(adView);
         
         inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         hostLayout = (LinearLayout) findViewById(R.id.hostLayout);
@@ -88,6 +97,8 @@ public class MainActivity extends ActionBarActivity {
 					view = patternedView;
 					initializePatternedViewComponents(view);
 					startPatternButton.setText(R.string.start_vibration_button);
+					/*strikeField.setOnTouchListener(onTouchListener);
+					pausesField.setOnTouchListener(onTouchListener);*/
 					break;
 				}
 				hostLayout.addView(view);
@@ -240,6 +251,26 @@ public class MainActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
+    
+  /*  protected OnTouchListener onTouchListener = new OnTouchListener() {		
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			advertise.setVisible(false);
+			return false;
+		}
+	};*/
+	
+	/*protected void detectKeyboardStatus() {
+		if(keyboard.isAcceptingText())
+			advertise.setVisible(false);
+		else
+			advertise.setVisible(true);
+	}*/
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		//detectKeyboardStatus();
+	}
 
 }
