@@ -17,8 +17,8 @@
     <string name="options_label">Change options</string>
     
     <string-array name="unit_choices">
-        <item >Seconds</item>
-        <item >Millisec</item>
+        <item >sec</item>
+        <item >ms</item>
     </string-array>
     
     <string-array name="vibration_options">

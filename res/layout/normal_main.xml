@@ -34,7 +34,7 @@
         android:text="@string/start_vibration_button" />
 
     <Spinner
-        android:id="@+id/unitSpinner"
+        android:id="@+id/strikesUnitSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/startButton"

@@ -36,9 +36,12 @@ public class MainActivity extends ActionBarActivity {
 	
 	protected EditText strikeField;
 	protected EditText pausesField;
+	protected Spinner strikeUnitSpinner;
+	protected Spinner pausesUnitSpinner;
 	protected CheckBox repeatCheckBox;
 	
 	protected boolean vibratorIsOn;
+	protected int patternDuration;
 	
 	protected Spinner layoutSpinner;
 	protected LayoutInflater inflater;
@@ -69,18 +72,22 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
+				vibrator.cancel();
+				vibratorIsOn = false;
 				View view = null;
-				setNormalToNull();
+				//setNormalToNull();
 				hostLayout.removeAllViews();
 				switch (layoutSpinner.getSelectedItemPosition()) {
 				case FIRST_ITEM:
 					view = normalView;
 					initializeNormalViewComponents(view);
+					startNormalButton.setText(R.string.start_vibration_button);
 					break;
 
 				case SECOND_ITEM:
 					view = patternedView;
 					initializePatternedViewComponents(view);
+					startPatternButton.setText(R.string.start_vibration_button);
 					break;
 				}
 				hostLayout.addView(view);
@@ -93,8 +100,7 @@ public class MainActivity extends ActionBarActivity {
 			}
 		});
         
-        startNormalButton.setOnClickListener(new OnClickListener() {
-			
+        startNormalButton.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View v) {
 				startNormalVibration();
@@ -105,6 +111,8 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				startPatternedVibration();
+				if(!repeatCheckBox.isChecked())
+					changeButtonTextAfter(patternDuration);
 			}
 		});
         
@@ -114,22 +122,23 @@ public class MainActivity extends ActionBarActivity {
     private void initializeNormalViewComponents(View view) {
     	durationField = (EditText) view.findViewById(R.id.durationField);
     	startNormalButton = (Button) view.findViewById(R.id.startButton);
-    	unitSpinner = (Spinner) view.findViewById(R.id.unitSpinner);
+    	unitSpinner = (Spinner) view.findViewById(R.id.strikesUnitSpinner);
     }
     
-    private void setNormalToNull() {
+   /* private void setNormalToNull() {
     	durationField = null;
     	strikeField = null;startNormalButton = null;
     	pausesField = null;
     	unitSpinner = null;
-    }
+    }*/
     
     private void initializePatternedViewComponents(View view) {
     	strikeField = (EditText) view.findViewById(R.id.strikeField);
     	pausesField = (EditText) view.findViewById(R.id.pauseField);
     	repeatCheckBox = (CheckBox) view.findViewById(R.id.repeatCheckBox);
     	startPatternButton = (Button) view.findViewById(R.id.patternButton);
-    	unitSpinner = (Spinner) view.findViewById(R.id.unitSpinner);
+    	strikeUnitSpinner = (Spinner) view.findViewById(R.id.strikesUnitSpinner);
+    	pausesUnitSpinner = (Spinner) view.findViewById(R.id.pausesUnitSpinner);
     }
     
     private int checkInput(EditText field) {
@@ -189,12 +198,12 @@ public class MainActivity extends ActionBarActivity {
     	if(strike>0 && pauses>=0)
     		status = true;
     	
-    	
-    	if(unitSpinner.getSelectedItemPosition() == FIRST_ITEM) {
+    	if(strikeUnitSpinner.getSelectedItemPosition() == FIRST_ITEM)
     		strike = strike * TO_SECONDS;
+    	if(pausesUnitSpinner.getSelectedItemPosition() == FIRST_ITEM)
     		pauses = pauses * TO_SECONDS;
-    	}
     	
+    	patternDuration = strike + pauses;    	
     	
     	long stk = (long) strike;
     	long pse = (long) pauses;

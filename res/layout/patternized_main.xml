@@ -26,10 +26,10 @@
         android:inputType="number" />
 
     <Spinner
-        android:id="@+id/unitSpinner"
+        android:id="@+id/strikesUnitSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/patternButton"
+        android:layout_above="@+id/pausesLabel"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/lengthText"
         android:layout_toRightOf="@+id/strikeField"
@@ -69,5 +69,15 @@
         android:layout_alignLeft="@+id/pauseField"
         android:layout_below="@+id/repeatCheckBox"
         android:text="@string/start_vibration_button" />
+
+    <Spinner
+        android:id="@+id/pausesUnitSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/repeatCheckBox"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/pausesLabel"
+        android:layout_toRightOf="@+id/strikeField"
+        android:entries="@array/unit_choices" />
 
 </RelativeLayout>
