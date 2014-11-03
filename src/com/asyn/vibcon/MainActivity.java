@@ -1,10 +1,10 @@
 package com.asyn.vibcon;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdView;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 	
 	public final static int TO_SECONDS = 1000;
 	
@@ -70,8 +70,8 @@ public class MainActivity extends ActionBarActivity {
         
         inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         hostLayout = (LinearLayout) findViewById(R.id.hostLayout);
-        normalView = inflater.inflate(R.layout.normal_main, null);
-        patternedView = inflater.inflate(R.layout.patternized_main, null);
+        normalView = inflater.inflate(R.layout.normal_main, null); // TODO
+        patternedView = inflater.inflate(R.layout.patternized_main, null); // TODO
         initializeNormalViewComponents(normalView);
         initializePatternedViewComponents(patternedView);
         hostLayout.addView(normalView);

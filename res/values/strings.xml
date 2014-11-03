@@ -26,5 +26,7 @@
     </string-array>
     
 	<string name="MY_AD_UNIT_ID">ca-app-pub-1060236991679345/8734698986</string>
+    
+	<string name="background_desc">This is the background</string>
 
 </resources>
